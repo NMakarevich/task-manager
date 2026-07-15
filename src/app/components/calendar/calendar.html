@@ -1,0 +1,15 @@
+<div class="calendar">
+  <div class="calendar-controls">
+
+  </div>
+  <div class="calendar-title">
+    @for (day of daysOfWeek; track $index) {
+      <span class="day-title">{{day}}</span>
+    }
+  </div>
+  <div class="calendar-month">
+    @for (day of monthMap(); track day) {
+      <app-day [day]="day"/>
+    }
+  </div>
+</div>

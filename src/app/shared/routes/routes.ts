@@ -15,7 +15,7 @@ export const routesList: RoutesList = {
     },
   },
   todosDate: {
-    path: 'todos/:year-month-date',
+    path: 'todos/:year-month-day',
     getLink: (date) => {
       return `todos/${date}`;
     },
