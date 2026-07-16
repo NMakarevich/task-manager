@@ -12,7 +12,7 @@
         <mat-label>Новая задача</mat-label>
         <input matInput type="text" placeholder="Текст задачи" [(ngModel)]="newTodo">
       </mat-form-field>
-      <button matButton (click)="addTodo()">
+      <button matButton="filled" (click)="addTodo()" [disabled]="!newTodo()">
         <mat-icon>add</mat-icon>
         Добавить
       </button>
