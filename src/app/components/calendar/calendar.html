@@ -1,6 +1,21 @@
 <div class="calendar">
   <div class="calendar-controls">
-
+    <mat-form-field>
+      <mat-label>Выбрать год</mat-label>
+      <mat-select (selectionChange)="selectYear($event.value)" [value]="currentYear">
+        @for (year of years(); track year) {
+          <mat-option [value]="year">{{ year }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Выбрать месяц</mat-label>
+      <mat-select [value]="currentMonth" (selectionChange)="selectMonth($event.value)">
+        @for (month of monthes; track $index) {
+          <mat-option [value]="$index">{{month}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
   </div>
   <div class="calendar-title">
     @for (day of daysOfWeek; track $index) {
