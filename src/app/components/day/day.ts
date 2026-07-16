@@ -16,7 +16,7 @@ export class Day {
   private calendarService = inject(CalendarService);
 
   isSelected = computed(() => {
-    return this.calendarService.selectedDateString() === this.day()?.toDateString();
+    return this.calendarService.getDate() === this.day()?.toDateString();
   });
 
   selectDay = (event?: KeyboardEvent) => {

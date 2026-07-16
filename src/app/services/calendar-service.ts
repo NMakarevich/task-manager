@@ -9,7 +9,7 @@ export class CalendarService {
   private selectedYear = signal(
     parseInt(localStorage.getItem(LS_SELECTED_YEAR) ?? `${new Date().getFullYear()}`)
   );
-  private selectedDate = signal(parseInt(localStorage.getItem(LS_SELECTED_DATE) ?? `0`));
+  private selectedDate = signal(localStorage.getItem(LS_SELECTED_DATE) ?? `0`);
 
   monthMap = computed(() => {
     const date = new Date(this.selectedYear(), this.selectedMonth());
@@ -37,21 +37,9 @@ export class CalendarService {
   };
 
   updateDate = (date: Date) => {
-    this.selectedDate.update(() => date.getDate());
-    localStorage.setItem(LS_SELECTED_DATE, String(date));
-    this.updateMonth(date.getMonth());
-    this.updateYear(date.getFullYear());
+    this.selectedDate.update(() => date.toDateString());
+    localStorage.setItem(LS_SELECTED_DATE, this.selectedDate());
   };
-
-  selectedDateString = computed(() => {
-    if (this.selectedDate() !== 0) {
-      return new Date(
-        this.selectedYear(),
-        this.selectedMonth(),
-        this.selectedDate()
-      ).toDateString();
-    } else return;
-  });
 
   getMonth = () => {
     return this.selectedMonth();
