@@ -1,0 +1,28 @@
+<div class="todo">
+  <mat-checkbox [checked]="todo().isDone" (change)="handleCheckboxChange($event.checked)"/>
+  <div class="todo-field">
+    @if (isEditMode()) {
+      <mat-form-field subscriptSizing="dynamic" class="todo-input" appearance="outline">
+        <input matInput type="text" [(ngModel)]="todoText">
+      </mat-form-field>
+      <div class="todos-controls">
+        <button matIconButton (click)="updateTodo()">
+          <mat-icon>check</mat-icon>
+        </button>
+        <button matIconButton (click)="toggleEditMode()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    } @else {
+      <span>{{todo().text}}</span>
+      <div class="todos-controls">
+        <button matIconButton (click)="toggleEditMode()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button matIconButton (click)="deleteTodo()">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    }
+  </div>
+</div>
