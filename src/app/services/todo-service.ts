@@ -36,6 +36,7 @@ export class TodoService {
       todos[date][index] = { ...todo };
       return { ...todos };
     });
+    localStorage.setItem(LS_TASKS, JSON.stringify(this.todos()));
   };
 
   deleteTodo = (id: number, date: string) => {
@@ -43,5 +44,6 @@ export class TodoService {
       todos[date] = todos[date].filter((todo) => id !== todo.id);
       return { ...todos };
     });
+    localStorage.setItem(LS_TASKS, JSON.stringify(this.todos()));
   };
 }
