@@ -1,30 +1,32 @@
-import { Directive, ElementRef, inject, input, OnInit } from '@angular/core';
+import { computed, Directive, inject, input } from '@angular/core';
 import { CalendarService } from '@services/calendar-service';
 
 @Directive({
   selector: '[appColorizeDay]',
+  host: { '[class]': 'setClass()' },
 })
-export class ColorizeDay implements OnInit {
-  private el = inject(ElementRef);
+export class ColorizeDay {
   private calendarService = inject(CalendarService);
 
   appColorizeDay = input<Date>();
 
-  ngOnInit() {
+  setClass = computed(() => {
     const day = this.appColorizeDay();
+    const classes = [];
     if (day) {
       const dayOfWeek = day.getDay();
-      if ([0, 6].includes(dayOfWeek)) {
-        this.el.nativeElement.classList.add('weekend');
-      }
       const month = day.getMonth();
-      if (month !== this.calendarService.getMonth()) {
-        this.el.nativeElement.classList.add('out-of-month');
-      }
       const currentDate = new Date().toDateString();
+      if ([0, 6].includes(dayOfWeek)) {
+        classes.push('weekend');
+      }
+      if (month !== this.calendarService.getMonth()) {
+        classes.push('out-of-month');
+      }
       if (currentDate === day.toDateString()) {
-        this.el.nativeElement.classList.add('current');
+        classes.push('current');
       }
     }
-  }
+    return classes.join(' ');
+  });
 }
