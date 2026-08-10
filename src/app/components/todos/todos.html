@@ -1,0 +1,45 @@
+<section class="todos">
+  <div class="todos-header">
+    <h2 class="todos-title">Задачи на {{ currentDate | date:'d.MM.yyyy' }}</h2>
+    <a matButton="filled" class="back-link" [routerLink]="routesList.main.getLink()">
+      <mat-icon>undo</mat-icon>
+      Вернуться на главную
+    </a>
+  </div>
+  <div class="todos-controls">
+    <div class="create-todo">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="todo-input">
+        <mat-label>Новая задача</mat-label>
+        <input matInput type="text" placeholder="Текст задачи" [(ngModel)]="newTodo">
+      </mat-form-field>
+      <button matButton="filled" (click)="addTodo()" [disabled]="!newTodo()">
+        <mat-icon>add</mat-icon>
+        Добавить
+      </button>
+    </div>
+    <div class="search-todo">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="todo-input">
+        <mat-label>Найти задачу</mat-label>
+        <input matInput type="text" placeholder="Текст задачи" [(ngModel)]="searchTodo">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="todos-lists">
+    <h3>Активные задачи</h3>
+    <div class="todos-active">
+      @for (todo of activeTodos(); track todo.id) {
+        <app-todo [todo]="todo" />
+      } @empty {
+        <span>Нет активных задач</span>
+      }
+    </div>
+    <h3>Выполненные задачи</h3>
+    <div class="todos-completed">
+      @for (todo of completedTodos(); track todo.id) {
+        <app-todo [todo]="todo" />
+      } @empty {
+        Нет завершенных задач
+      }
+    </div>
+  </div>
+</section>

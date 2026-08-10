@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+
+.todo {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--mat-sys-outline);
+  border-radius: var(--mat-sys-corner-small);
+}
+
+.todo-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+
+  @include mat.form-field-overrides((
+    container-vertical-padding: 4px,
+    container-height: 32px,
+  ));
+}
+
+.todo-input {
+  flex: 1;
+}

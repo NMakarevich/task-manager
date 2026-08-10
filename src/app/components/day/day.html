@@ -1,0 +1,12 @@
+<div
+  class="day"
+  [ngClass]="isSelected() ? 'selected' : ''"
+  [appColorizeDay]="day()"
+  (click)="selectDay()"
+  (dblclick)="navigateToTodo()"
+  (keyup)="selectDay()"
+  [matBadge]="countOfTasks()"
+  [matBadgeHidden]="!countOfTasks()"
+  tabindex>
+  {{day() | date:'d' }}
+</div>
